@@ -1,0 +1,59 @@
+# User-specific files
+*.user
+*.userprefs
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Dd]ist/
+[Dd]istros/
+[Ll]ogs/
+
+# Uncomment if you have a local development environment setup
+.vscode/
+
+# Temporary files
+[Dd]ebug/
+[Dd]ebugPublic/
+[Ll]ogs/
+[Bb]in/
+[Bb]uild/
+[Bb]uilds/
+
+# Asset meta files that Unity generates
+# These are used by Unity internally, but often cause conflicts and are not necessary for version control
+*.pidb
+*.suo
+*.userprefs
+*.csproj
+*.unityproj
+*.tmp
+*.swp
+*.bak
+*.db
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Unity generated folders and files
+Library/
+Temp/
+Obj/
+Build/
+Builds/
+UserSettings/
+
+# Unity Cloud Build
+ubisoft/
+
+# Windows Installer files
+*.cab
+*.msi
+
+# Folder for compiled code, etc.
+*.dll
+*.pdb
