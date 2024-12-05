@@ -50,10 +50,14 @@ public class TouchingDirections : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        // Check for ground, wall, and ceiling collisions
-        IsGrounded = DetectCollision(Vector2.down, groundDistance);
-        IsOnWall = DetectCollision(WallCheckDirection, wallDistance);
+        // Check for ceiling first
         IsOnCeiling = DetectCollision(Vector2.up, ceilingDistance);
+
+        // If not on the ceiling, check for ground
+        IsGrounded = !IsOnCeiling && DetectCollision(Vector2.down, groundDistance);
+
+        // Check for wall collision
+        IsOnWall = DetectCollision(WallCheckDirection, wallDistance);
     }
 
     private bool DetectCollision(Vector2 direction, float distance) {
