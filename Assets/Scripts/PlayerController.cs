@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour {
     TouchingDirections touchingDirections;
     public float walkSpeed = 5f;
     public float runSpeed = 8f;
+    public float airWalkSpeed = 3f;
     [SerializeField] private bool _isMoving = false;
     [SerializeField] private bool _isRunning = false;
 
@@ -14,11 +15,15 @@ public class PlayerController : MonoBehaviour {
 
     public float CurrentMoveSpeed {
         get {
-            if (IsMoving) {
-                if (IsRunning) {
-                    return runSpeed;
+            if (IsMoving && !touchingDirections.IsOnWall) {
+                if (touchingDirections.IsGrounded) {
+                    if (IsRunning) {
+                        return runSpeed;
+                    } else {
+                        return walkSpeed;
+                    }
                 } else {
-                    return walkSpeed;
+                    return airWalkSpeed;
                 }
             } else {
                 return 0;
