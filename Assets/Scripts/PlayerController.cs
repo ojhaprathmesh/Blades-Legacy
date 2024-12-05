@@ -6,8 +6,8 @@ public class PlayerController : MonoBehaviour {
     Vector2 moveInput;
     public float walkSpeed = 5f;
     public float runSpeed = 8f;
-    private bool _isMoving = false;
-    private bool _isRunning = false;
+    [SerializeField] private bool _isMoving = false;
+    [SerializeField] private bool _isRunning = false;
 
     public bool _isFacingRight = true;
 

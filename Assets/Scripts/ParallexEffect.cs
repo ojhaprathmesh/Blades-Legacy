@@ -1,7 +1,6 @@
 using UnityEngine;
 
-public class ParallexEffect : MonoBehaviour
-{
+public class ParallexEffect : MonoBehaviour {
     public Camera cam;
     public Transform followTarget;
     Vector2 startingPosition; // Starting position for the parallex game object
@@ -12,14 +11,12 @@ public class ParallexEffect : MonoBehaviour
     float ClippingPlane => (cam.transform.position.z + (ZDistanceFromTarget > 0 ? cam.farClipPlane : cam.nearClipPlane));
 
     float ParallaxFactor => Mathf.Abs(ZDistanceFromTarget) / ClippingPlane;
-    void Start()
-    {
+    void Start() {
         startingPosition = transform.position;
         startingPositionZ = transform.position.z;
     }
 
-    void Update()
-    {
+    void Update() {
         Vector2 newPosition = startingPosition + CameraMovementSinceStart * ParallaxFactor;
         transform.position = new Vector3(newPosition.x, newPosition.y, startingPositionZ);
     }
