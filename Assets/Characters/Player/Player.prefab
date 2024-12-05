@@ -332,9 +332,7 @@ MonoBehaviour:
   walkSpeed: 4
   runSpeed: 8
   airWalkSpeed: 3
-  _isMoving: 0
-  _isRunning: 0
-  _isFacingRight: 1
+  airRunSpeed: 4
   jumpImpulse: 10
 --- !u!114 &4312035327014659663
 MonoBehaviour:
@@ -365,6 +363,3 @@ MonoBehaviour:
   groundDistance: 0.05
   wallDistance: 0.2
   ceilingDistance: 0.05
-  _isGrounded: 0
-  _isOnWall: 0
-  _isOnCeiling: 0

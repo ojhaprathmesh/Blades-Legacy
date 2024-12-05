@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour {
     public float walkSpeed = 5f;
     public float runSpeed = 8f;
     public float airWalkSpeed = 3f;
+    public float airRunSpeed = 4f;
     public float jumpImpulse = 10f;
 
     // State variables
@@ -23,10 +24,12 @@ public class PlayerController : MonoBehaviour {
 
     // Properties for state management
     private float CurrentMoveSpeed => CanMove 
-        ? (IsMoving && !touchingDirections.IsOnWall 
-            ? (touchingDirections.IsGrounded ? (IsRunning ? runSpeed : walkSpeed) : airWalkSpeed) 
-            : 0)
-        : 0;
+    ? (IsMoving && !touchingDirections.IsOnWall 
+        ? (touchingDirections.IsGrounded 
+            ? (IsRunning ? runSpeed : walkSpeed)  // Running while grounded
+            : (IsRunning ? airRunSpeed : airWalkSpeed)) // Running in the air
+        : 0)
+    : 0;
 
     private bool IsMoving {
         get => _isMoving;
