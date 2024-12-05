@@ -73,17 +73,17 @@ public class PlayerController : MonoBehaviour {
         // Handle movement input
         moveInput = context.ReadValue<Vector2>();
         IsMoving = moveInput != Vector2.zero;
-        SetFacingDirection(moveInput.x);
+        SetFacingDirection(moveInput);
     }
 
     public void OnRun(InputAction.CallbackContext context) {
         // Handle run toggle
-        IsRunning = context.started;
+        IsRunning = context.performed;
     }
 
     public void OnJump(InputAction.CallbackContext context) {
         // Handle jump input
-        if (context.started && touchingDirections.IsGrounded) {
+        if (context.started && touchingDirections.IsGrounded && CanMove) {
             animator.SetTrigger(AnimationStrings.jumpTrigger);
             rb.linearVelocity = new Vector2(rb.linearVelocityX, jumpImpulse);
         }
@@ -96,12 +96,10 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    private void SetFacingDirection(float horizontalInput) {
-        // Flip character based on movement direction
-        if (horizontalInput > 0 && !IsFacingRight) {
-            IsFacingRight = true;
-        } else if (horizontalInput < 0 && IsFacingRight) {
-            IsFacingRight = false;
+    private void SetFacingDirection(Vector2 moveInput) {
+        // Check direction of the player
+        if (moveInput.x != 0) {
+            IsFacingRight = moveInput.x > 0;
         }
     }
 }
