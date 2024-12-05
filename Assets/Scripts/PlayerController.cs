@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections))]
 public class PlayerController : MonoBehaviour {
     Vector2 moveInput;
+    TouchingDirections touchingDirections;
     public float walkSpeed = 5f;
     public float runSpeed = 8f;
     [SerializeField] private bool _isMoving = false;
@@ -59,14 +60,17 @@ public class PlayerController : MonoBehaviour {
 
     Rigidbody2D rb;
     Animator animator;
+    public float jumpImpulse = 10f;
 
     private void Awake() {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        touchingDirections = GetComponent<TouchingDirections>();
     }
 
     private void FixedUpdate() {
         rb.linearVelocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.linearVelocity.y);
+        animator.SetFloat(AnimationStrings.velocityY, rb.linearVelocityY);
     }
 
     public void OnMove(InputAction.CallbackContext context) {
@@ -82,6 +86,13 @@ public class PlayerController : MonoBehaviour {
             IsRunning = true;
         } else if (context.canceled) {
             IsRunning = false;
+        }
+    }
+
+    public void OnJump(InputAction.CallbackContext context) {
+        if (context.started && touchingDirections.IsGrounded) {
+            animator.SetTrigger(AnimationStrings.jump);
+            rb.linearVelocity = new Vector2(rb.linearVelocityX, jumpImpulse);
         }
     }
 
