@@ -12,9 +12,9 @@ public class TouchingDirections : MonoBehaviour {
     private Animator animator;
 
     // State variables
-    private bool _isGrounded;
-    private bool _isOnWall;
-    private bool _isOnCeiling;
+    [SerializeField] private bool _isGrounded;
+    [SerializeField] private bool _isOnWall;
+    [SerializeField] private bool _isOnCeiling;
 
     // Properties for state access
     public bool IsGrounded {
